@@ -29,6 +29,11 @@ jobs:
         include:
           - loader: Fabric
             mod-loader: fabric
+            target-version: "26.3"
+            supported-versions: "26.3"
+            artifact-name: ZMusic Fabric 26.3
+          - loader: Fabric
+            mod-loader: fabric
             target-version: "26.2"
             supported-versions: "26.2"
             artifact-name: ZMusic Fabric 26.2
@@ -147,6 +152,11 @@ jobs:
             target-version: 1.12.2
             supported-versions: 1.12.2
             artifact-name: ZMusic Forge 1.12.2
+          - loader: NeoForge
+            mod-loader: neoforge
+            target-version: "26.3"
+            supported-versions: "26.3"
+            artifact-name: ZMusic NeoForge 26.3
           - loader: NeoForge
             mod-loader: neoforge
             target-version: "26.2"
