@@ -1,5 +1,19 @@
 # Changelog
 
+## v3.8.3
+
+- 新增 Minecraft 26.3 支持，提供 Fabric 和 NeoForge 构建。
+- 将内置播放器升级至 `zmusic-player` 1.0.0-alpha.7。
+- 播放失败时记录并显示原生播放器返回的具体错误，便于定位问题。
+- 修复 Forge 1.12.2 发布包未重映射，导致首次客户端 tick 触发 `NoSuchMethodError` 的问题。
+
+English:
+
+- Added Minecraft 26.3 support with Fabric and NeoForge builds.
+- Upgraded the bundled player to `zmusic-player` 1.0.0-alpha.7.
+- Playback failures now log and report detailed native player errors for easier diagnosis.
+- Fixed Forge 1.12.2 production jars not being remapped, which caused a `NoSuchMethodError` on the first client tick.
+
 ## v3.8.2
 
 - 将内置播放器升级至 `zmusic-player` 1.0.0-alpha.6。
