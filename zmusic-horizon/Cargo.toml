@@ -1,0 +1,11 @@
+[package]
+name = "zmusic-horizon"
+version = "3.8.3"
+edition = "2024"
+license = "GPL-3.0-or-later"
+publish = false
+
+[dependencies]
+horizon-mod-api = { path = ".horizon/sdk/api/crates/horizon-mod-api" }
+log = "=0.4.34"
+zmusic-player = { path = "src/player" }

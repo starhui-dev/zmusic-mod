@@ -42,3 +42,8 @@ hs_err_*.log
 replay_*.log
 *.hprof
 *.jfr
+
+# horizon
+
+zmusic-horizon/.horizon/
+zmusic-horizon/target/

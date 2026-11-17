@@ -1,0 +1,27 @@
+[package]
+name = "zmusic-player"
+version = "1.0.0-alpha.7"
+edition = "2024"
+license = "GPL-3.0-or-later"
+publish = false
+
+[features]
+test-headless = []
+
+# 从 starhui-dev/zmusic-player 的 v1.0.0-alpha.7 同步；Horizon 直接复用 rlib，无需 JNI 和 CLI。
+[lib]
+name = "zmusic"
+crate-type = ["rlib"]
+path = "src/lib.rs"
+
+[dependencies]
+encoding_rs = "0.8.35"
+rodio = { version = "0.22.2", default-features = false, features = ["playback", "mp3", "wav", "flac", "vorbis"] }
+rustls = { version = "0.23.42", default-features = false, features = ["ring", "std", "tls12"] }
+tokio = { version = "1.53.1", features = ["macros", "rt", "sync", "time"] }
+
+[target.'cfg(target_os = "android")'.dependencies]
+reqwest = { version = "0.12.28", default-features = false, features = ["rustls-tls-webpki-roots-no-provider"] }
+
+[target.'cfg(not(target_os = "android"))'.dependencies]
+reqwest = { version = "0.13.4", default-features = false, features = ["blocking", "rustls-no-provider"] }

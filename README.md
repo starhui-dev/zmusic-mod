@@ -13,11 +13,18 @@
 
 ## 开发
 
+使用 `mise` 安装项目固定的 JDK 和 Rust 工具链，然后构建全部平台：
+
 ```shell
 git clone https://github.com/starhui-dev/zmusic-mod
 cd zmusic-mod
-./gradlew clean build
+mise install
+mise run build
 ```
+
+也可分别运行 `mise run build:fabric`、`build:forge`、`build:neoforge` 和 `build:horizon`。
+
+Horizon 26.3 使用独立原生模组，源码在 `zmusic-horizon/`，兼容目标固定在其 `horizon-mod.toml`。Linux 构建需要 C/C++ 工具链、`pkg-config` 和 ALSA 开发库；脚本会获取对应 Horizon 源码并生成、校验 `zmusic-horizon/target/horizon-mod/zmusic.hmod`。安装时需使用支持 `.hmod` 原生模组的 Horizon 构建。
 
 ## 开源协议
 

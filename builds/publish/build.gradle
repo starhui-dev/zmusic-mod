@@ -306,9 +306,10 @@ tasks.register('publishReleaseMirrors') {
         }
         def artifactFiles = fileTree(artifactsDir) {
             include '**/*.jar'
+            include '**/*.hmod'
         }.files.sort { it.name }
         if (artifactFiles.isEmpty()) {
-            publishMarketplaceFail("no jar artifacts found in: ${artifactsDirPath}")
+            publishMarketplaceFail("no release artifacts found in: ${artifactsDirPath}")
         }
 
         def releasePayload = [

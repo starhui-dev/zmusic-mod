@@ -248,6 +248,34 @@ jobs:
           name: ZMusic ${{ matrix.loader }} ${{ matrix.target-version }}
           path: ${{ matrix.artifact-path }}
 
+  horizon:
+    name: ZMusic Horizon 26.3
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Setup mise
+        uses: jdx/mise-action@v4
+      - name: Install native build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential pkg-config libasound2-dev
+      - name: Cache Horizon dependencies
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            .gradle/horizon-sdk
+          key: ${{ runner.os }}-horizon-${{ hashFiles('zmusic-horizon/horizon-mod.toml', 'zmusic-horizon/Cargo.lock', 'scripts/build-horizon.sh') }}
+          restore-keys: ${{ runner.os }}-horizon-
+      - name: Build Horizon 26.3
+        run: scripts/build-horizon.sh
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: ZMusic Horizon 26.3
+          path: zmusic-horizon/target/horizon-mod/zmusic.hmod
+
   marketplace-dry-run:
     name: Check ${{ matrix.loader }} ${{ matrix.target-version }}
     runs-on: ubuntu-latest
@@ -457,6 +485,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - build
+      - horizon
       - changelog
     steps:
       - uses: actions/checkout@v6
@@ -490,6 +519,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - build
+      - horizon
       - changelog
       - marketplace-dry-run
       - release-mirrors-dry-run
@@ -512,7 +542,9 @@ jobs:
         uses: softprops/action-gh-release@v3
         with:
           body_path: release-notes/release-notes.md
-          files: artifacts/**/*.jar
+          files: |
+            artifacts/**/*.jar
+            artifacts/**/*.hmod
 
   publish-marketplaces:
     name: Publish ${{ matrix.loader }} ${{ matrix.target-version }}

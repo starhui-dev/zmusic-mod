@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- 新增 Horizon 26.3 原生 `.hmod` 构建，支持服务端播放消息、原版音乐抑制、唱片音量同步和断线停止。
+
+English:
+
+- Added a native Horizon 26.3 `.hmod` build with server play messages, vanilla music suppression, record-volume synchronization, and disconnect handling.
+
 ## v3.8.3
 
 - 新增 Minecraft 26.3 支持，提供 Fabric 和 NeoForge 构建。

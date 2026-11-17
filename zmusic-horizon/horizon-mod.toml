@@ -1,0 +1,24 @@
+id = "zmusic"
+name = "ZMusic"
+version = "3.8.3"
+description = "Play server-provided music through the ZMusic native player"
+authors = ["ZhenXin"]
+api = "0.2"
+side = "client"
+capabilities = ["registries"]
+license = "GPL-3.0-or-later"
+homepage = "https://github.com/starhui-dev/zmusic-mod"
+issues = "https://github.com/starhui-dev/zmusic-mod/issues"
+
+[native]
+game = "26.3"
+horizon = "c07bfa76e71e8db9e84a7e61832a8fb898718e81"
+mixins = "e59da9094f0c2fdda6c627fe9eff22dec6a906f0"
+
+# mod_api 只暴露主音量；在读取音频设置时同步 RECORDS 分类音量。
+[[native.mixin]]
+id = "records_volume"
+target = "horizon_client::game::native_hooks::client_options::Game<'_>::audio_options"
+kind = "HEAD"
+helper = "src/mixins/audio_options.rs"
+bindings = [{ name = "game", ty = "&Game<'_>", value = "&*self" }]
